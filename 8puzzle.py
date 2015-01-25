@@ -2,21 +2,12 @@
 import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "codeLibs"))
 
-from graph import *
-from dfs import *
-
+from bfs import bfsAI
+from utils import calculateInversions, swap
 
 initialState = 'X45738162'
 goalState = {'0': '12345678X', '1' : '1238X4765'}
 
-
-def calculateInversions(state):
-	inversion = 0
-	for idx, val in enumerate(state):
-		for val2 in state[idx+1:]:
-			if val2 != 'X' and str(val2) < str(val):
-				inversion += 1
-	return inversion
 
 
 def getActions(state):
@@ -58,13 +49,6 @@ def getActions(state):
 
 	return possibleActions
 
-def swap(state, idx1, idx2):
-	# if idx1 is greater than idx2 swap them to maintain integrity
-	if idx1 > idx2:
-		tmp = idx1
-		idx1 = idx2
-		idx2 = tmp
-	return state[0:idx1] + state[idx2] + state[idx1+1:idx2] + state[idx1] + state[idx2+1:]
 
 def applyAction(state, action):
 	xIndex = state.index('X')
@@ -78,31 +62,12 @@ def applyAction(state, action):
 		return swap(state, xIndex + 3, xIndex)
 
 
+def applyActions(state,actions):
+	newStates = []
+	for action in actions:
+		newStates.append(applyAction(state,action))
+	return newStates
 
-def search(initialState):
-	count = 0
-	discoveredStates = [initialState]
-	undiscoveredStates = [initialState]
-	while len(undiscoveredStates):
-		count += 1
-		print(undiscoveredStates[0])
-		actions = getActions(undiscoveredStates[0])
-		for action in actions:
-			newState = applyAction(undiscoveredStates[0],action)
-			if goalState[str(goalStateIndex)] == newState:
-				print("goal reached")
-				return count
-			elif newState not in discoveredStates:
-				undiscoveredStates.append(newState)
-				discoveredStates.append(newState)
-		undiscoveredStates.pop(0)
-	return count
-
-
-
-			
 goalStateIndex = calculateInversions(initialState)%2
 
-
-
-print(search(initialState))
+print(bfsAI(initialState, goalState[str(goalStateIndex)], getActions, applyActions, debug = True))

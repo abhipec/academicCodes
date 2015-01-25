@@ -1,4 +1,4 @@
-def bfs(graph, start , end = 'NaN', marked=[]):
+def bfsGraph(graph, start , end = 'NaN', marked=[]):
 	# add start node in marked list and FIFO queue
 	queue = [start]
 	marked.append(start)
@@ -17,3 +17,33 @@ def bfs(graph, start , end = 'NaN', marked=[]):
 		queue.pop(0)
 	# return marked in end, this will show path bfs has followed
 	return marked
+
+
+def bfsAI(initialState, goalState, getActions, applyActions, debug=False):
+	'''
+	Search for solution using BFS.
+	initialState	-- initial state
+	goalState		-- goal state
+	getActions		-- must be a function object that returns list of actions possible for that state
+	applyActions	-- must be function object that returns list of new state after applying actions
+	debug 			-- it will print each state at time of exploration
+	'''
+	discoveredStates = [initialState]
+	undiscoveredStates = [initialState]
+	count = 0
+	while len(undiscoveredStates):
+		count += 1
+		if debug:
+			print(undiscoveredStates[0])
+		for state in applyActions(undiscoveredStates[0],getActions(undiscoveredStates[0])):
+			if goalState == state:
+				if debug:
+					print(goalState)
+				return count
+			elif state not in discoveredStates:
+				discoveredStates.append(state)
+				undiscoveredStates.append(state)
+		undiscoveredStates.pop(0)
+	return count
+
+
