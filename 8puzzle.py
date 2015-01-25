@@ -3,6 +3,7 @@ import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "codeLibs"))
 
 from bfs import bfsAI
+from dfs import dfsAI, iddfs
 from utils import calculateInversions, swap
 
 initialState = 'X45738162'
@@ -70,4 +71,5 @@ def applyActions(state,actions):
 
 goalStateIndex = calculateInversions(initialState)%2
 
-print(bfsAI(initialState, goalState[str(goalStateIndex)], getActions, applyActions, debug = True))
+# print(iddfs(initialState, goalState[str(goalStateIndex)], getActions, applyActions, debug = False, depth = 40))
+print(bfsAI(initialState, goalState[str(goalStateIndex)], getActions, applyActions, debug = False))
