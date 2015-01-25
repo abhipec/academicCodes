@@ -34,6 +34,11 @@ class DirectedGraph:
 		else:
 			return None
 
+	def getEdges(self,vertex):
+		tmp = self.getVertex(vertex)
+		if tmp:
+			return tmp.getEdges()
+
 	def addEdge(self,vertex,nbr,weight=0):
 		if nbr not in self.vertices.keys():
 			self.addVertex(nbr)

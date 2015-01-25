@@ -5,7 +5,7 @@ def bfs(graph, start , end = 'NaN', marked=[]):
 	# loop till queue becomes empty
 	while len(queue):
 		# explore neighbors of first element of queue 
-		for edge in graph.getVertex(queue[0]).getEdges():
+		for edge in graph.getEdges(queue[0]):
 			# if end state found return 
 			if edge == end:
 				return marked
