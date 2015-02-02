@@ -7,7 +7,7 @@ from utils import calculateInversions, swapInList
 from Astar import Astar
 
 if len(sys.argv) != 2:
-	print('Usage: python NpuzzleAstar "1,2,3,4,5,6,7,8,0"',file=sys.stderr)
+	print('Usage: python NpuzzleAstar "1,2,3,4,5,6,7,8,0"')
 	exit()
 
 initialState = sys.argv[1]
