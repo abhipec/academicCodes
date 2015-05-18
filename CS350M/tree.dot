@@ -1,0 +1,16 @@
+graph { 
+splines=true;
+sep="+25,25";
+overlap=scalexy;
+nodesep=0.6;
+10001 -- 10006;
+10004 -- 10003;
+10002 -- 10004;
+10004 -- 10005;
+10006 -- 10005;
+10005 -- 10007;
+10008 -- 10007;
+10008 -- 10009;
+10010 -- 10009;
+10008 [label="10008",shape=ellipse,fillcolor="burlywood",style="filled"];
+}
